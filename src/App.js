@@ -1,29 +1,77 @@
-import Card from './components/Card';
+import React from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import faker from 'faker';
 
-function App() {
-  return (
-    <div className="App">
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-      <Card name='Porsche Taycan'
-        surname="20.000.000TL "
-        nickname="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        sillyname="edward"
-        link="Kendi Taycan'ınızı yaratmak için tıklayın" />
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+    },
+  },
+};
 
-      <Card name='Porsche Taycan'
-        surname="20.000.000TL "
-        nickname="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        sillyname="edward"
-        link="Kendi Taycan'ınızı yaratmak için tıklayın" />
+var years = 5;
+var start = 1;
 
-      <Card name='Porsche Taycan'
-        surname="20.000.000TL "
-        nickname="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        sillyname="edward"
-        link="Kendi Taycan'ınızı yaratmak için tıklayın" />
+var labels = [];
 
-    </div>
-  );
+while(start<=years*12){
+  
+  if(start%12 === 0){
+    labels.push(12)
+    start++
+    continue
+  }
+  
+  labels.push((start++)%12)
+  
+  
 }
 
-export default App;
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    {
+      label: 'Dataset 2',
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
+
+export default function App() {
+  return <Line options={options} data={data} />;
+}
+
