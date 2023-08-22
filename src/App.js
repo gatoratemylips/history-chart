@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
 import { useState } from 'react';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,13 +14,13 @@ import {
   LogarithmicScale,
 
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+
 import faker from 'faker';
 
 export default function App() {
   const [toggle, setToggle] = useState(false);
 
-  const datas = [1, 10, 100, 110,12, 1000];
+  const datas = [1, 10, 100, 1100, 12000, 100000];
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   ChartJS.register(
@@ -35,8 +36,11 @@ export default function App() {
   const options = {
     scales: {
       y: {
-        type: toggle ? "linear" : 'logarithmic',
-      
+        type: 'linear', // Linear scale for the y-axis
+        beginAtZero: true,
+        ticks: {
+          callback: value => Math.pow(10, value).toFixed(0), // Convert back to original values
+        },
       },
     },
     responsive: true,
@@ -45,14 +49,13 @@ export default function App() {
         titleFont: { size: 13.2, family: "Yekan" },
         bodyFont: { size: 14.2, family: "Yekan" },
         callbacks: {
-          
+
           title: (context) => `Month: ${monthNames[context[0].label - 1]}`,
           label: (context) => {
             const originalValue = Math.pow(10, context.parsed.y).toFixed(0);
-
-            return `Sign Ups: ${toggle ? context.parsed.y : originalValue}`;
+            return `Value: ${originalValue}`;
           },
-          
+
         },
       },
       legend: {
@@ -64,23 +67,23 @@ export default function App() {
       },
     },
   };
- 
-  function deneme(){
-    if(!toggle){
+
+  function deneme() {
+    if (!toggle) {
       return value => Math.pow(10, value).toFixed(0);
     }
 
   }
-  function deneme2(){
-    if(toggle){
+  function deneme2() {
+    if (toggle) {
       return datas;
-    }else{
+    } else {
       return transformedYData;
     }
-    
-    }
-  
- 
+
+  }
+
+
 
   var start = 1;
 
@@ -94,14 +97,14 @@ export default function App() {
     }
     labels.push((start++) % 12)
   }
- 
+
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Sign Up',
-        data: toggle ? datas : transformedYData,
+        data: transformedYData,
         borderColor: 'rgb(5, 989, 132)',
         backgroundColor: 'rgb(5, 989, 132)',
         cubicInterpolationMode: "monotone",
