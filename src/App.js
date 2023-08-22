@@ -18,9 +18,9 @@ import {
 import faker from 'faker';
 
 export default function App() {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
-  const datas = [1, 10, 100, 1100, 12000, 100000];
+  const datas = [1, 10, 100000, 110, 12, 100000,35,2932,23423];
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   ChartJS.register(
@@ -32,16 +32,23 @@ export default function App() {
     Tooltip,
     Legend
   );
+  const isLogarithmic = true;
   const transformedYData = datas.map(value => Math.log10(value));
   const options = {
     scales: {
+    
       y: {
         type: 'linear', // Linear scale for the y-axis
         beginAtZero: true,
+        ...!toggle && {
         ticks: {
           callback: value => Math.pow(10, value).toFixed(0), // Convert back to original values
         },
+        },
+      
+        
       },
+    
     },
     responsive: true,
     plugins: {
@@ -53,7 +60,7 @@ export default function App() {
           title: (context) => `Month: ${monthNames[context[0].label - 1]}`,
           label: (context) => {
             const originalValue = Math.pow(10, context.parsed.y).toFixed(0);
-            return `Value: ${originalValue}`;
+            return `Value: ${ originalValue }`;
           },
 
         },
@@ -68,21 +75,7 @@ export default function App() {
     },
   };
 
-  function deneme() {
-    if (!toggle) {
-      return value => Math.pow(10, value).toFixed(0);
-    }
-
-  }
-  function deneme2() {
-    if (toggle) {
-      return datas;
-    } else {
-      return transformedYData;
-    }
-
-  }
-
+ 
 
 
   var start = 1;
@@ -104,7 +97,7 @@ export default function App() {
     datasets: [
       {
         label: 'Sign Up',
-        data: transformedYData,
+        data: toggle ?  datas : transformedYData ,
         borderColor: 'rgb(5, 989, 132)',
         backgroundColor: 'rgb(5, 989, 132)',
         cubicInterpolationMode: "monotone",
