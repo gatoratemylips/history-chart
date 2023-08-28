@@ -1,6 +1,7 @@
 import Menu from './Menu';
 import { Line } from 'react-chartjs-2';
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux'
+import { toggle } from './toggleSlice'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +16,8 @@ import {
 
 
 const ChartHelper = () => {
-  const toggle = true;
+  const dispatch = useDispatch();
+  const toggle = useSelector(state => state.toggle.value);
   const datas = [1, 10, 100000, 110, 12, 100000, 35, 2932, 23423];
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 

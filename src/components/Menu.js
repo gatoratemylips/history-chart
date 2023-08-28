@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ReactComponent as IconPlus } from '../assets/plus.svg';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux'
+import { toggler } from './toggleSlice'
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const toggle = true;
+  const toggle = useSelector(state => state.toggle.value);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const onClickHelperMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,7 +17,8 @@ const Menu = () => {
         <label>
           <input
             type="checkbox"
-            checked={toggle}
+            checked={!toggle}
+            onChange={() => dispatch(toggler())}
             
             />
           Logarithmic
