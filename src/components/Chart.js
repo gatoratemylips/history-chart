@@ -16,6 +16,7 @@ import {
 
 
 const ChartHelper = () => {
+  const color = useSelector(state => state.change.value)
   const dispatch = useDispatch();
   const toggle = useSelector(state => state.toggle.value);
   const datas = [1, 10, 100000, 110, 12, 100000, 35, 2932, 23423];
@@ -109,8 +110,8 @@ const ChartHelper = () => {
       {
         label: 'Sign Up',
         data: toggle ? datas : transformedYData,
-        borderColor: 'rgb(200, 1, 12)',
-        backgroundColor: 'rgb(200, 1, 12)',
+        borderColor: color,
+        backgroundColor: 'rgb(2, 1, 12)',
         cubicInterpolationMode: "monotone",
 
       },
