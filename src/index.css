@@ -1,5 +1,3 @@
-* {color: cyan;}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,68 +7,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.menu {
+  position: absolute;
+  left: 32px;
+  top: 32px;
 }
-.App{
+
+.menu-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
   display: flex;
-  height: 100vh;  
+  background-color: #b8b8b8;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.card {
-  width: 400px;
-  background-color: #ffffff;
-  border-radius: 25px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  height: min-content;
-  
 }
 
-.card-wrapper{
+.menu-button-altered {
+  padding: 16px;
   display: flex;
   flex-direction: column;
- 
-}
-.card-text-wrapper{
-  padding: 24px ;
   gap: 16px;
-  display: flex;
-  flex-direction: column;
-}
-.link a{
-  color: rgb(0, 183, 255);
-
-}
-a{
-  text-decoration:none;
-  transition-duration: 300ms;
-  transition-delay: 600ms;
+  background-color: #b8b8b8;
+  border-radius: 32px;
 }
 
+.plus {
+  fill: #fff;
+  height: 32px;
+  width: 32px;
+  transition: all 0.5s;
+}
 
-.image{
-  object-fit: contain;  
-  border-radius: 15px 15px 0 0;
-}
-.header{
-  font-weight: 800;
-  color: black;
-}
-.subheader{
-  font-weight: 300;
-  color: black;
-}
-.description{
-  font-weight: 400;
-  color: black;
-  font-size: 10px;
-}
-.link{
-  color: aqua;
-  padding-top: 16px;
-
+.plus.rotate {
+  rotate: 45deg;
+  fill: red;
 }
