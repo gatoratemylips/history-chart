@@ -7,6 +7,7 @@ import { colorPick } from './colorSlice'
 
 const Menu = () => {
   const dispatch = useDispatch();
+
   const color = useSelector(state => state.change.value)
   const toggle = useSelector(state => state.toggle.value);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,17 +18,31 @@ const Menu = () => {
   function MenuHelper() {
     return (
       <>
-        <label>
-          <input
-            type="checkbox"
+
+
+
+<div class="checkbox-wrapper-26"> <div className="logarius">Logarithmic</div>
+          <input t type="checkbox"
             checked={!toggle}
-            onChange={() => dispatch(toggler())}
+            onChange={() => dispatch(toggler())} id="_checkbox-26"/>
+            <label for="_checkbox-26">
+              <div class="tick_mark">  </div>
+            </label>
+        </div>
+        <label htmlFor="colorpicker">Color Picker:
+          <input
+            type="color"
+            id="colorpicker"
+            value={color}
+            onChange={(e) => {
+              dispatch(colorPick(e.target.value));
+            }}
           />
-          Logarithmic
+          <input type="color" id="pickcolor" value={color} />
         </label>
-        <label for="colorpicker">Color Picker:
-          <input type="color" id="colorpicker" value={color} onChange={(e) => dispatch(colorPick(e.target.value))}></input>
-        </label>
+        
+
+
       </>
     );
   }
