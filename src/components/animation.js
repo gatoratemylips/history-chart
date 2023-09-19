@@ -1,7 +1,7 @@
-const totalDuration = 10000;
-const datas = [1, 10, 100000, 110, 12, 100000, 35, 2932, 23423];
+import dataJson from "../assets/data";
 
-const delayBetweenPoints = totalDuration / datas.length;
+const totalDuration = 3000;
+const delayBetweenPoints = totalDuration / dataJson.length;
 const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
 export const animation = {
   x: {
@@ -29,5 +29,8 @@ export const animation = {
       ctx.yStarted = true;
       return ctx.index * delayBetweenPoints;
     }
-  }
+  },
+  
+  
+  
 };
